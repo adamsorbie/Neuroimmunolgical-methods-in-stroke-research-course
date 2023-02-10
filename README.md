@@ -49,8 +49,11 @@ Square
 There are 6 basic data types in R: logical, numeric, integer, character, raw and complex. Today (and in general) only the first four are important. 
 
 ```logical``` Can only have two values ```TRUE``` or ```FALSE``` (Shorthand:```T```,```F```). 
+
 ```numeric``` All numbers with or without decimal ```100.34```
+
 ```integer``` Whole numbers ```123L``` A number appended with L suffix denotes an integer in R
+
 ```character``` Character or string values. Enclosed in either single 'microbe' or double "stroke" quotes. 
 
 ### Data structures 
@@ -59,14 +62,18 @@ Four most commonly used data structures
 
 #### 1D
 Vectors - ordered collection of data of a given length and all of the same type:
-```vector1 <- c(1,3,7,8,9)```
-```vector2 <- c("A", "B", "C", "D")``` 
-```print(vector2)```
+```
+vector1 <- c(1,3,7,8,9)
+vector2 <- c("A", "B", "C", "D")
+print(vector2)
+```
 
 Lists - ordered collection of data/objects of a given length. Can be composed of heterogenous types. 
-```list1 <- list(vector1, vector2)```
-```list2 <- list(1,2,3)```
-```print(list1)```
+```
+list1 <- list(vector1, vector2)
+list2 <- list(1,2,3)
+print(list1)
+```
 
 #### 2D 
 
@@ -94,7 +101,7 @@ x <- "Bacteria_data.txt"
 ``` 
 Or to save time by storing long strings/numbers 
 
-´´´
+```
 y <- 127575738398292929
 ```
 
@@ -116,7 +123,6 @@ This prints out each element in the ```vector2```variable we defined earlier. No
 We will discover a more interesting use case later. 
 
 if/else statements allow us to control the flow of our code better: 
-
 
 ```
 x <- 100
