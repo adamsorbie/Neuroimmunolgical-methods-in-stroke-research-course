@@ -28,14 +28,19 @@ Type and test these operations in the console in Rstudio
 
 Addition
 ```1 + 1```
+
 Subtraction 
 ```5 - 4``` 
+
 Multiplication 
 ```2 * 10```
+
 Division
 ```9 / 3```
+
 Modulo 
 ```20 %/% 6```
+
 Square
 ```4^2 or 4**2``` 
 
@@ -43,7 +48,7 @@ Square
 
 There are 6 basic data types in R: logical, numeric, integer, character, raw and complex. Today (and in general) only the first four are important. 
 
-```logical``` Can only have two values ```TRUE``` or ```FALSE``` (Shorthand:```T````,```F```). 
+```logical``` Can only have two values ```TRUE``` or ```FALSE``` (Shorthand:```T```,```F```). 
 ```numeric``` All numbers with or without decimal ```100.34```
 ```integer``` Whole numbers ```123L``` A number appended with L suffix denotes an integer in R
 ```character``` Character or string values. Enclosed in either single 'microbe' or double "stroke" quotes. 
@@ -127,9 +132,44 @@ Change the values of x and y and see how the output changes.
 
 ### Functions 
 
+Functions are used to abstract repetitive code in something which is reusable and modular, making code easier to read and debug. 
 
+Using the above if else example we could create a function called ```greater_than``` which tells us which value is highest in a more modular way
+
+```
+greater_than <- function(x, y) {
+  if (x > y) {
+    print("x is higher")
+  } else if (x < y) {
+    print("y is higher")
+  }
+}
+```
+```
+greater_than(x=100, y=10)
+greater_than(x=1, y=17)
+```
+
+More interesting functions might perform a calculation for us and return the value 
+
+```
+normalise <- function(x) {
+  x_norm <- t(100 * t(x) / colSums(x))
+  return(x_norm)
+}
+```
+Let's run this function on the matrix we created earlier to see what it does. 
+```
+normalise(m)
+```
+
+You can also use built-in functions or install packages to access functions written by others. It's usually the case that someone has already written a function for whatever you want to do. 
+
+If you need help with a function you can also type ?functionname in the console e.g. ?log10 and the help for that function will show up, detailing what the function does, what inputs it expects and what value(s) it returns. 
 
 ### Data wrangling 
+
+A few key concepts on loading and manipulating data. 
 
 
 
@@ -137,15 +177,13 @@ Now we understand a little bit of R we can move on to the actual analysis.
 
 # Analysis of Microbiota data
 
-## Set-up 
-
 
 
 ## Data Analysis 
 
 
 ``` r
-source("../../scripts/analysis_functions.R")
+source("analysis_functions.R")
 ```
 
 Firstly, we will read the ASV table(s) and metadata into R, using
@@ -153,16 +191,12 @@ phyloseq. We have included the data used in this publication to
 demonstrate our analysis pipeline.
 
 ``` r
-ps <- import_as_pseq(otu = "../../data/ASV_seqtab_tax.tab",
-                mapping = "../../data/Metadata-16S-sequenced_wo_ctrls.txt",
-                tree = "../../data/ASV_tree.tre")
+ps <- import_as_pseq(otu = "ASV_seqtab_tax.tab",
+                mapping = "metadata.txt")
 ```
 
-    ## Warning: Expected 6 pieces. Additional pieces discarded in 461 rows [1, 2, 3, 4,
-    ## 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, ...].
-
 Phyloseq is used as it provides a nice way of storing all the associated
-data in one object or class. As you can see, the metadata, tree and ASV
+data in one object or class. As you can see, the metadata and ASV
 table are all combined here into `ps`. Importantly, each part can also
 be accessed invidivually.
 
