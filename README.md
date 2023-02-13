@@ -188,6 +188,8 @@ A few key concepts on loading and manipulating data.
 
 Reading data 
 ``` r
+# install tidyverse
+install.packages("tidyverse")
 # load tidyverse
 library(tidyverse)
 # read in the palmer penguins csv file 
@@ -203,7 +205,7 @@ Base R
 ``` r
 bill_length <- penguins$bill_length_mm
 # alternative
-bill_length <- penguins["bill_length_mm", ]
+bill_length <- penguins["bill_length_mm"]
 ```
 Tidyverse
 ``` r
@@ -251,7 +253,7 @@ phyloseq. We have included the data used in this publication to
 demonstrate our analysis pipeline.
 
 ``` r
-ps <- import_as_pseq(otu = "ASV_seqtab_tax.tab",
+ps <- import_as_pseq(asvtab = "ASV_seqtab_tax.tab",
                 mapping = "metadata.txt")
 ```
 
@@ -265,6 +267,13 @@ be accessed invidivually.
 Here will transform the data using minimum sum normalisation and
 relative abundance for downstream analyses.
 
+### Why do we need to normalise? 
+
+``` r
+barplot(sort(sample_sums(ps)), horiz = TRUE, las = 2, xlab=NULL, main="Library sizes")
+hist(sort(sample_sums(ps)), las = 2)
+```
+
 ### How does normalisation work?
 
 Minimum sum normalisation works by dividing the sum in each sample by
@@ -273,6 +282,7 @@ a fixed sum.
 
 Relative, transforms each sample into compositions, on a fixed scale of
 0-100.
+
 
 ``` r
 ps_norm <- transform(ps, transform = "mss")
@@ -332,10 +342,6 @@ species *i* and *ln* is the natural logarithm.
 
 This metric accounts for both the abundance and evenness of taxa.
 
-Lastly, Faith’s alpha diversity is calulated as the sum of the branch
-lengths in the phylogenetic tree. This method does not account for
-abundance, only measuring the phylogenetic diversity of a sample.
-
 Now we have calculated alpha diversity, we can merge this information
 with our metadata to generate a dataframe for plotting.
 
@@ -393,7 +399,6 @@ plot_boxplot(df = alpha_div_meta, variable_col = "Group", value_col = "Richness"
 
     ## [1] "Sham"   "Stroke"
 
-![](stroke_microbiota_analysis_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 \#\#\#\# Shannon Effective
 
 ``` r
@@ -405,20 +410,6 @@ plot_boxplot(df = alpha_div_meta, variable_col = "Group", value_col = "Shannon.E
 
     ## [1] "Sham"   "Stroke"
 
-![](stroke_microbiota_analysis_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
-
-#### Faith’s PD
-
-``` r
-plot_boxplot(df = alpha_div_meta, variable_col = "Group", value_col = "Faiths.PD", 
-             fill_var = "Group", comparisons_list = comps, xlab = "Group", 
-             ylab = "Faiths.PD", p_title = "Faith's PD Stroke vs Sham", 
-             col_palette = colours, group.order = c("Sham", "Stroke")) 
-```
-
-    ## [1] "Sham"   "Stroke"
-
-![](stroke_microbiota_analysis_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 Statistical significance is calculated internally in the `plot_boxplot`
 function using unpaired wilcoxon, thus currently this function is only
@@ -457,7 +448,7 @@ Similarly, there are also various ordination options:
     space.
 
 ``` r
-betadiv <- calc_betadiv(ps_norm, dist = "gunifrac", ord_method = "NMDS")
+betadiv <- calc_betadiv(ps_norm, dist = "bray", ord_method = "NMDS")
 ```
 
     ## Run 0 stress 0.07932429 
@@ -531,7 +522,6 @@ plot_beta_div(ps_norm, ordination = betadiv$Ordination,
     ## species/OTU/taxa coordinate indices did not match `physeq` index names. Setting
     ## corresponding coordinates to NULL.
 
-![](stroke_microbiota_analysis_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 \#\# Differential abundance
 
 The final step of this pipeline is to calculate differentially abundant
@@ -543,7 +533,7 @@ only the phyloseq object and the column name of the grouping variable is
 required.
 
 ``` r
-res_ancom <- ancom_da(ps_norm, "Group")
+res_ancom <- ancom_da(ps_norm,formula="Group", group="Group")
 ```
 
     ## Warning: The multi-group comparison will be deactivated as the group variable
