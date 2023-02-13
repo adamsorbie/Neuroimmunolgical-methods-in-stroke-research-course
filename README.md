@@ -19,6 +19,10 @@ Since some of you may not have any experience using R, we will very quickly go t
 
 ### Before we begin 
 
+Download the course content and extract the folder. 
+
+![Alt text](Download_instructions.gif) / ! [](Download_instructions.gif)
+
 Navigate to the course folder and open the "Neuroimmunolgical-methods-in-stroke-research-course-microbiota-analysis.Rmd" file in Rstudio. 
 
 
@@ -62,14 +66,14 @@ Four most commonly used data structures
 
 #### 1D
 Vectors - ordered collection of data of a given length and all of the same type:
-```
+``` r
 vector1 <- c(1,3,7,8,9)
 vector2 <- c("A", "B", "C", "D")
 print(vector2)
 ```
 
 Lists - ordered collection of data/objects of a given length. Can be composed of heterogenous types. 
-```
+``` r
 list1 <- list(vector1, vector2)
 list2 <- list(1,2,3)
 print(list1)
@@ -78,13 +82,13 @@ print(list1)
 #### 2D 
 
 Matrices - 2D data structure (rows x columns) of the same type
-```
+``` r
 m <- matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9), nrow = 3, ncol = 3)
 print(m)
 ```
 
 Dataframes - 2D heterogenous data structure (rows x columns)
-```
+``` r
 df <- data.frame(bacteria = c("E. coli", "L. reuteri", "C. difficile"),
                  sample1 = c(10, 27, 61),
                  sample2 = c(9, 200, 43) )
@@ -96,12 +100,12 @@ print(df)
 Variables are assigned in R using the ```<-``` operator. A variable can be though of a a "box" you store a value in for later use.
 
 They can be used to store a value which you want to be constant throughout your code e.g. a file name 
-```
+``` r
 x <- "Bacteria_data.txt" 
 ``` 
 Or to save time by storing long strings/numbers 
 
-```
+``` r
 y <- 127575738398292929
 ```
 
@@ -113,7 +117,7 @@ As well as writing individual statements like we have done above we can also use
 
 for loops allow us to repeat code a specified number of times e.g.
 
-```
+``` r
 for (i in vector2){
   print(i)
  }
@@ -124,7 +128,7 @@ We will discover a more interesting use case later.
 
 if/else statements allow us to control the flow of our code better: 
 
-```
+``` r
 x <- 100
 y <- 10
 
@@ -142,7 +146,7 @@ Functions are used to abstract repetitive code in something which is reusable an
 
 Using the above if else example we could create a function called ```greater_than``` which tells us which value is highest in a more modular way
 
-```
+``` r
 greater_than <- function(x, y) {
   if (x > y) {
     print("x is higher")
@@ -151,25 +155,27 @@ greater_than <- function(x, y) {
   }
 }
 ```
-```
+
+``` r
 greater_than(x=100, y=10)
 greater_than(x=1, y=17)
 ```
 
 More interesting functions might perform a calculation for us and return the value 
 
-```
+``` r
 normalise <- function(x) {
   x_norm <- t(100 * t(x) / colSums(x))
   return(x_norm)
 }
 ```
 Let's run this function on the matrix we created earlier to see what it does. 
-```
+
+``` r
 normalise(m)
 ```
 
-You can also use built-in functions or install packages to access functions written by others. It's usually the case that someone has already written a function for whatever you want to do. 
+You can also use built-in functions or install packages to access functions written by others. It's usually the case that someone has already written a function for whatever you want to do. External packages can be downloaded using the ```install.packages``` function and loaded using the ```library``` function. 
 
 If you need help with a function you can also type ?functionname in the console e.g. ?log10 and the help for that function will show up, detailing what the function does, what inputs it expects and what value(s) it returns. 
 
@@ -177,6 +183,18 @@ If you need help with a function you can also type ?functionname in the console 
 
 A few key concepts on loading and manipulating data. 
 
+Reading data 
+``` r
+# load tidyverse
+library(tidyverse)
+# read in the palmer penguins csv file 
+penguins <- read_csv("penguins.csv")
+```
+
+Manipulating data 
+``` r
+
+```
 
 
 Now we understand a little bit of R we can move on to the actual analysis. 
