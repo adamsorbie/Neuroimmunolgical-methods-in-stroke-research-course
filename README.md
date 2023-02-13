@@ -1,5 +1,6 @@
 # Neuroimmunolgical-methods-in-stroke-research-course
 
+![Alt text](Stroke-microbiota-analysis.png) / ! [](Stroke-microbiota-analysis.png) 
 Data analysis part of the 2023 Neuroimmunolgical methods in stroke research at the ISD - Friday 17/02/23
 
 # Instructions 
@@ -235,7 +236,7 @@ Now we understand a little bit of R we can move on to the actual analysis.
 
 # Analysis of Microbiota data
 
-Here we will perform a very streamlined analysis of 16S rRNA sequencing data. This dataset comes from our lab and was published last year (Sorbie et al, iScience 2022)[https://www.sciencedirect.com/science/article/pii/S2589004222002681]. 
+Here we will perform a very streamlined analysis of 16S rRNA sequencing data. This dataset comes from our lab and was published last year [Sorbie et al, iScience 2022](https://www.sciencedirect.com/science/article/pii/S2589004222002681). 
 
 ## Data Analysis 
 
