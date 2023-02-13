@@ -192,19 +192,52 @@ penguins <- read_csv("penguins.csv")
 ```
 
 Manipulating data 
-``` r
 
+Selecting columns 
+
+Base R 
+
+``` r
+bill_length <- penguins$bill_length_mm
+# alternative
+bill_length <- penguins["bill_length_mm", ]
+```
+Tidyverse
+``` r
+# select certain columns 
+bill_length <- select(penguins, bill_length_mm) 
+# using pipe operator
+bill_length <- penguins %>% 
+    select(bill_length_mm)
 ```
 
+Filtering rows 
 
+Base R 
+``` r
+gentoo  <- penguins[penguins$species == "Gentoo", ]
+```
+Tidyverse
+``` r
+gentoo  <- filter(penguins, species == "Gentoo")
+# with pipe 
+gentoo <- penguins %>%
+    filter(species == "Gentoo")
+```
+
+Filtering and selecting in one with the pipe operator 
+``` r
+gentoo_bill_length <- penguins %>%
+    filter(species == "Gentoo") %>%
+    select(bill_length_mm)
+```
 Now we understand a little bit of R we can move on to the actual analysis. 
 
 # Analysis of Microbiota data
 
-
+Here we will perform a very streamlined analysis of 16S rRNA sequencing data. This dataset comes from our lab and was published last year (Sorbie et al, iScience 2022)[https://www.sciencedirect.com/science/article/pii/S2589004222002681]. 
 
 ## Data Analysis 
-
 
 ``` r
 source("analysis_functions.R")
