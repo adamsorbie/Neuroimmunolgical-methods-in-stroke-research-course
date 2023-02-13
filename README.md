@@ -6,7 +6,7 @@ Data analysis part of the 2023 Neuroimmunolgical methods in stroke research at t
 
 ## Download and install R and Rstudio
 
-Download and install the specific version of R for your OS [here:](https://ftp.fau.de/cran/=)
+Download and install the specific version of R for your OS [here:](https://ftp.fau.de/cran/)
 (If using Windows 10/11, install [Rtools](https://cran.r-project.org/bin/windows/Rtools/rtools42/files/rtools42-5355-5357.exe) as well) 
 
 Download and install [Rstudio](https://posit.co/download/rstudio-desktop/)
