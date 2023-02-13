@@ -7,12 +7,9 @@ pacman::p_load(
   ggpubr,
   ggsci,
   rstatix,
-  picante,
   phyloseq,
   vegan,
   ANCOMBC,
-  phangorn,
-  GUniFrac,
   zoo
 )
 
@@ -166,12 +163,6 @@ Shannon.E <- function(x) {
   return(shannon.e)
 }
 
-# calculate faiths phylogenetic diversity
-Faiths <- function(x, tree) {
-  pd <- pd(x, tree, include.root = F)
-  return(pd[, 1])
-}
-
 # calculate richness
 Richness <- function(x, detection = 0.5) {
   observed <- sum(x > detection)
@@ -183,8 +174,6 @@ calc_alpha <- function(ps, ...) {
   mat_in <- ps_to_asvtab(ps) %>%
     t()
   
-  tree <- phy_tree(ps)
-  
   diversity <-
     setNames(data.frame(matrix(ncol = 3, nrow = nsamples(ps))),
              c("Richness", "Shannon.Effective", "Faiths.PD"))
@@ -192,7 +181,6 @@ calc_alpha <- function(ps, ...) {
   
   diversity$Richness <- apply(mat_in, 1, Richness, ...)
   diversity$Shannon.Effective <- apply(mat_in, 1, Shannon.E)
-  diversity$Faiths.PD <- Faiths(mat_in, tree)
 
   return(diversity)
 }
@@ -200,32 +188,6 @@ calc_alpha <- function(ps, ...) {
 
 
 ######################### BETA DIVERSITY #########################
-
-# Calculate Gunifrac in phyloseq objects
-phyloseq_gunifrac <- function(ps, asdist = TRUE) {
-  # input phyloseq obj
-  # returns dist matrix of GUnifrac distance which can
-  # be used as input for ordinate() function
-  
-  #extract otu table and tree
-  asvtab <- t(ps_to_asvtab(ps))
-  tree <- phy_tree(ps)
-  
-  # root tree at midpoint
-  rooted_tree <- midpoint(tree)
-  
-  # calculate gunifrac
-  gunifrac <- GUniFrac(asvtab, rooted_tree,
-                       alpha = c(0.0, 0.5, 1.0))$unifracs
-  # alpha param is weight on abundant lineages, 0.5 has best power
-  # so we will extract this
-  if (asdist == T) {
-    return(stats::as.dist(gunifrac[, , "d_0.5"]))
-  }
-  else{
-    return(gunifrac[, , "d_0.5"])
-  }
-}
 
 
 calc_betadiv <- function(ps, dist, ord_method = "NMDS") {
@@ -235,14 +197,6 @@ calc_betadiv <- function(ps, dist, ord_method = "NMDS") {
       dist_metric <- distance(ps, dist)
       ord <- ordinate(ps, ord_method, dist_metric)
       return_list <- list("Distance_Matrix" = dist_metric,
-                          "Ordination" = ord)
-      return(return_list)
-    }
-    else if (dist %in% c("gunifrac")) {
-      gu <- phyloseq_gunifrac(ps)
-      ord <- ordinate(ps, ord_method, gu)
-      
-      return_list <- list("Distance_Matrix" = gu,
                           "Ordination" = ord)
       return(return_list)
     }
