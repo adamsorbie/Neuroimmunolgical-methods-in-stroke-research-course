@@ -1,4 +1,4 @@
-# Neuroimmunolgical-methods-in-stroke-research-course
+# Neuroimmunological-methods-in-stroke-research-course
 
 ![Alt text](Stroke-microbiota-analysis.png) [](Stroke-microbiota-analysis.png) 
 
