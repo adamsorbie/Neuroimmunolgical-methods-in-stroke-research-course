@@ -120,13 +120,35 @@ Change the values of x and y and see how the output changes.
 
 ### Functions 
 
+Functions are used to abstract repetitive code in something which is reusable and modular, making code easier to read and debug. 
+
+Using the above if else example we could create a function called ```greater_than``` which tells us which value is highest in a more modular way
 ```{r}
 
 ```
 
+```{r}
+
+```
+
+More interesting functions might perform a calculation for us and return the value 
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+You can also use built-in functions or install packages to access functions written by others. It's usually the case that someone has already written a function for whatever you want to do. 
+External packages can be downloaded using the ```install.packages``` function and loaded using the ```library``` function. 
+
+If you need help with a function you can also type ?functionname in the console e.g. ?log10 and the help for that function will show up, detailing what the function does, what inputs it expects and what value(s) it returns. 
 
 ### Data wrangling 
 
+A few key concepts on loading and manipulating data.
 ```{r}
 
 ```
