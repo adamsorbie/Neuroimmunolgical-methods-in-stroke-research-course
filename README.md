@@ -1,6 +1,6 @@
 # Neuroimmunolgical-methods-in-stroke-research-course
 
-![Alt text](Stroke-microbiota-analysis.png) / ! [](Stroke-microbiota-analysis.png) 
+![Alt text](Stroke-microbiota-analysis.png) [](Stroke-microbiota-analysis.png) 
 
 
 Data analysis part of the 2023 Neuroimmunolgical methods in stroke research at the ISD - Friday 17/02/23
@@ -24,7 +24,7 @@ Since some of you may not have any experience using R, we will very quickly go t
 
 Download the course content and extract the folder. 
 
-![Alt text](Download_instructions.gif) / ! [](Download_instructions.gif)
+![Alt text](Download_instructions.gif)  [](Download_instructions.gif)
 
 Navigate to the course folder and open the "Neuroimmunolgical-methods-in-stroke-research-course-microbiota-analysis.Rmd" file in Rstudio. 
 
