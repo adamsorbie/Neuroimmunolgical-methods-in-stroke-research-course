@@ -1,6 +1,8 @@
 # Neuroimmunolgical-methods-in-stroke-research-course
 
 ![Alt text](Stroke-microbiota-analysis.png) / ! [](Stroke-microbiota-analysis.png) 
+
+
 Data analysis part of the 2023 Neuroimmunolgical methods in stroke research at the ISD - Friday 17/02/23
 
 # Instructions 
