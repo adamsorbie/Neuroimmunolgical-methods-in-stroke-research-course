@@ -51,6 +51,16 @@ Modulo
 Square
 ```4^2 or 4**2``` 
 
+Comparison
+Greater than
+```>``` 
+Less than 
+```<``` 
+Equals 
+```==```
+Does not equal 
+```!=```
+
 ### Basic types 
 
 There are 6 basic data types in R: logical, numeric, integer, character, raw and complex. Today (and in general) only the first four are important. 
