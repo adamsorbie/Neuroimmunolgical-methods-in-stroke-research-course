@@ -43,6 +43,12 @@ Square
 
 ``` 
 
+Comparisons
+
+```{r}
+
+``` 
+
 ### Basic types 
 
 There are 6 basic data types in R: logical, numeric, integer, character, raw and complex. Today (and in general) only the first four are important. 
@@ -153,10 +159,37 @@ A few key concepts on loading and manipulating data.
 
 ```
 
+Base R 
+
+```{r}
+
+```
+Tidyverse
+```{r}
+
+```
+
+Filtering rows 
+
+Base R 
+```{r}
+
+```
+Tidyverse
+```{r}
+
+```
+
+Filtering and selecting in one with the pipe operator 
+```{r}
+
+```
 
 Now we understand a little bit of R we can move on to the actual analysis. 
 
 # Analysis of Microbiota data
+
+Here we will perform a very streamlined analysis of 16S rRNA sequencing data. This dataset comes from our lab and was published last year [Sorbie et al, iScience 2022](https://www.sciencedirect.com/science/article/pii/S2589004222002681). 
 
 ## Data Analysis 
 
@@ -181,6 +214,12 @@ be accessed invidivually.
 
 Here will transform the data using minimum sum normalisation and
 relative abundance for downstream analyses.
+
+### Why do we need to normalise? 
+
+```{r}
+
+```
 
 ### How does normalisation work?
 
@@ -207,12 +246,11 @@ We can see how this works by looking at the column sums:
 
 ## Alpha Diversity
 
-Here we will calculate three different measures of alpha-diversity:
+Here we will calculate two different measures of alpha-diversity:
 
 -   Species richness, or the number of observed species
     -   This is calculated by
 -   Shannon effective diversity, measuring
--   Faith’s PD, measuring the phylogenetic component of alpha diversity
 
 The function `calc_alpha` wraps all of these calculations and only
 requires the mss normalised phyloseq object as input, returning a
@@ -237,10 +275,6 @@ where *R* = richness, *p<sub>i</sub>* is the relative abundance of
 species *i* and *ln* is the natural logarithm.
 
 This metric accounts for both the abundance and evenness of taxa.
-
-Lastly, Faith’s alpha diversity is calulated as the sum of the branch
-lengths in the phylogenetic tree. This method does not account for
-abundance, only measuring the phylogenetic diversity of a sample.
 
 Now we have calculated alpha diversity, we can merge this information
 with our metadata to generate a dataframe for plotting.
@@ -292,12 +326,6 @@ here with the `group.order`parameter.
 
 ```
 
-
-```{r}
-
-```
-
-#### Faith’s PD
 
 ```{r}
 
@@ -386,7 +414,7 @@ diverging dot plot coloured by group, providing a clear figure showing
 which taxa change between conditions.
 
 To this function, we need to provide the results of the ancom test
-above, an ordered vector of the group levels e.g. `c("Sham", "Stroke")`.
+above, an ordered vector of the group levels e.g. ```c("Sham", "Stroke")```.
 Additionally, we can provide the group colours to make interpretation
 easier.
 
