@@ -214,16 +214,20 @@ Base R
 
 ``` r
 bill_length <- penguins$bill_length_mm
+print(bill_length)
 # alternative
 bill_length <- penguins["bill_length_mm"]
+print(bill_length)
 ```
 Tidyverse
 ``` r
 # select certain columns 
 bill_length <- select(penguins, bill_length_mm) 
+print(bill_length)
 # using pipe operator
 bill_length <- penguins %>% 
     select(bill_length_mm)
+print(bill_length)
 ```
 
 Filtering rows 
@@ -231,13 +235,16 @@ Filtering rows
 Base R 
 ``` r
 gentoo  <- penguins[penguins$species == "Gentoo", ]
+print(gentoo)
 ```
 Tidyverse
 ``` r
 gentoo  <- filter(penguins, species == "Gentoo")
+print(gentoo)
 # with pipe 
 gentoo <- penguins %>%
     filter(species == "Gentoo")
+print(gentoo)
 ```
 
 Filtering and selecting in one with the pipe operator 
@@ -245,6 +252,7 @@ Filtering and selecting in one with the pipe operator
 gentoo_bill_length <- penguins %>%
     filter(species == "Gentoo") %>%
     select(bill_length_mm)
+print(gentoo_bill_length)
 ```
 Now we understand a little bit of R we can move on to the actual analysis. 
 
@@ -263,8 +271,8 @@ phyloseq. We have included the data used in this publication to
 demonstrate our analysis pipeline.
 
 ``` r
-ps <- import_as_pseq(asvtab = "ASV_seqtab_tax.tab",
-                mapping = "metadata.txt")
+ps <- import_as_pseq(asvtab = "data/ASV_seqtab_tax.tab",
+                mapping = "data/metadata.txt")
 ```
 
 Phyloseq is used as it provides a nice way of storing all the associated
@@ -321,12 +329,10 @@ colSums(otu_table(ps_norm))
 
 ## Alpha Diversity
 
-Here we will calculate three different measures of alpha-diversity:
+Here we will calculate two different measures of alpha-diversity:
 
 -   Species richness, or the number of observed species
-    -   This is calculated by
--   Shannon effective diversity, measuring
--   Faith’s PD, measuring the phylogenetic component of alpha diversity
+-   Shannon effective diversity, measuring richness and evenness 
 
 The function `calc_alpha` wraps all of these calculations and only
 requires the mss normalised phyloseq object as input, returning a
