@@ -52,12 +52,16 @@ Square
 ```4^2 or 4**2``` 
 
 Comparison
+
 Greater than
 ```>``` 
+
 Less than 
 ```<``` 
+
 Equals 
 ```==```
+
 Does not equal 
 ```!=```
 
