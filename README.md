@@ -51,7 +51,7 @@ Modulo
 Square
 ```4^2 or 4**2``` 
 
-Comparison
+### Comparison
 
 Greater than
 ```>``` 
